@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Picture Telephone</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui">
+  </head>
+  <body>
+    <div class="container">
+      <section id="splash">
+        <img class="logo" src="/images/logo.png">
+        <button id="splash_login" class="small-2">Login</button>
+        <button id="splash_signup" class="small-2">Sign Up</button>
+      </section>
+
+      <section id="login">
+        <img class="logo" src="/images/logo.png">
+        <div class="col-md-12">
+          <form>
+            <div class="form-group">
+              <input class="text" placeholder="Enter username" id="username" value=""></input>
+              <br />
+              <button id="btnLogin" class="small-2" type="submit">Login</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="game_selection">
+        <img class="logo" src="/images/logo.png"><br>
+        <form>
+          <input class="text" id="join_game_code" placeholder="Enter Game Code"></input><br>
+          <button id="game_join" type="submit" class="small-2">Join Party</button><br>
+          <button id="game_host" class="small-2">Host Party</button>
+        </form>
+      </section>
+
+      <section id="game_lobby">
+        <img class="logo" src="/images/logo.png">
+        <div id="game-setup-container">
+          <div id="game_setup_instructions">Let everyone know to join using the Game Code below. Only host can start game.</div>
+          <div id="game_code"></div>
+        </div>
+        
+        <div id="player-list">
+          <div id="player_count"></div>
+          <div id="users"></div>
+        </div>
+        <div lass="col-md-8">
+          <button id="btnStartGame" class="small-2">Start Game</button>
+        </div>
+        <div id="chat" lass="col-md-8">
+          <div class="chat well" id ="chat"></div>
+          <label>Enter Message</label>
+          <input class="form-control" id="message"></input>
+          <br />
+          <button id="btnSendMsg" class="small-2">Send</button>
+        </div>
+      </section>
+      
+      <section id="game_phrase">
+        <div class="banner">
+          <div id="banner-first-phrase">Write a phrase below to kick off the game:</div>
+          <div id="banner-first-phrase-phrase"></div>
+        </div>
+        <!--
+        <button id="bonus-1" class="small-3">
+          <img class="star" src="/images/star.svg">
+          <div id="bonus-1-word">Star</div>
+        </button>
+        <button id="bonus-1" class="small-3">
+          <img class="star" src="/images/star.svg">
+          <img class="star" src="/images/star.svg">
+          <div id="bonus-2-word">Boba</div>
+        </button>
+        <button id="bonus-1" class="small-3">
+          <img class="star" src="/images/star.svg">
+          <img class="star" src="/images/star.svg">
+          <img class="star" src="/images/star.svg">
+          <div id="bonus-3-word">Monster</div>
+        </button>
+        -->
+        <textarea id="phrase"></textarea><br>
+        <button id="game_phrase_submit" class="small-2 game_submit" type="phrase">Done</button>
+      </section>
+      <div class="instructions" id="game_phrase_instructions">
+        <div class="instructions_container">
+          <div>On the next screen, write down a phrase for the next person to guess.</div>
+          <img class="instructions_image" src="/images/guess.svg">
+        </div>
+        <button id="instructions_close_phrase" class="small-2 instructions_close" type="phrase">Got it!</button>
+      </div>
+
+      <div class="wait" id="game_wait_phrase">
+        <div class="wait_container">
+          <div>You're off to the races. Let's wait for everyone else to catch up.</div>
+          <img src="/images/waiting.png">
+          <div class="ready_list">These folks are ready:</div>
+        </div>
+        <!--<button id="wait_close_phrase" class="small-2 wait_close" type="phrase">Got it!</button>-->
+      </div> 
+
+
+
+
+      <section id="game_draw">
+
+        <div class="banner">
+          <div id="banner-draw">
+            Draw the phrase below:
+            <span id="timer"></span>
+          </div>
+          <div id="banner-draw-phrase"></div>
+        </div>
+        <div id="drawing-options">
+          <img class="left" id="clear-canvas" src="/images/trash.png" style="margin-right:10px;margin-left:10px;">
+
+          <div class="drawing-width-selector" value="5" style="background-color:#000000;"><img src="/images/width-1-selected.png"></div>
+          <div class="drawing-width-selector" value="25" style="background-color:#000000;"><img src="/images/width-2.png"></div>
+          <div class="drawing-width-selector" value="40" style="background-color:#000000;"><img src="/images/width-3.png"></div>
+
+          <img id="erase" src="/images/erase.png">
+          <button class="right game_submit" id="game_drawing_submit" type="drawing">Done</button>
+        </div>
+        <div id="canvas-wrapper">
+          <canvas id="canvas" width="600" height="500" style="border:1px solid #ccc;"></canvas>
+        </div>
+        <div style="display: inline-block; margin-left: 10px">
+          <div id="drawing-mode-options">
+            <div class="drawing-color-selector" style="background-color:#000000;"><img src="/images/btn-color-selected.png"></div>
+            <div class="drawing-color-selector" style="background-color:#044999;"><img src="/images/btn-color.png"></div>
+            <div class="drawing-color-selector" style="background-color:#549707;"><img src="/images/btn-color.png"></div>
+            <div class="drawing-color-selector" style="background-color:#FF0000;"><img src="/images/btn-color.png"></div>
+            <div class="drawing-color-selector" style="background-color:#FFE11A;"><img src="/images/btn-color.png"></div>
+            <div class="drawing-color-selector" style="background-color:#FD7400;"><img src="/images/btn-color.png"></div>
+          </div>
+        </div>
+      </section>
+      <div class="instructions" id="game_draw_instructions">
+        <div class="instructions_container">
+          <div>Draw the phrase on the next screen</div>
+          <img class="instructions_image" src="/images/pencil.svg">
+        </div>
+        <button id="instructions_close_draw" class="small-2 instructions_close" type="phrase">Got it!</button>
+      </div>
+
+      <div class="wait" id="game_wait_drawing">
+        <div class="wait_container">
+          <div>You're a Picasso. Waiting until everyone is ready.</div>
+          <img src="/images/waiting.png">
+          <div class="ready_list">These folks are ready:</div>
+        </div>
+        <!-- <button id="wait_close_drawing" class="small-2 draw_close" type="drawing">Let's go!</button> -->
+      </div>
+
+      <section id="game_guess">
+        <div class="banner">
+          <div id="banner-guess">Describe this magnificent work of art:</div>
+        </div>
+        <div class="svg-wrapper">
+          <div id="svg">
+          </div>
+        </div>
+        <div>Type in what you see below!</div>
+        <textarea id="guess"></textarea><br>
+        <button id="game_guess_replay" class="small-2">Replay</button>
+        <button id="game_guess_submit" class="small-2 game_submit" type="guess">Submit</button>
+      </section>
+      <div class="instructions" id="game_guess_instructions">
+        <div class="instructions_container">
+          <div>Guess what was drawn on the next screen.</div>
+          <img class="instructions_image" src="/images/guess.svg">
+        </div>
+        <button id="instructions_close_guess" class="small-2 instructions_close" type="phrase">Got it!</button>
+      </div>
+
+      <div class="wait" id="game_wait_guess">
+        <div class="wait_container">
+          <div>You're a great interpreter. Waiting until everyone is ready.</div>
+          <img src="/images/waiting.png">
+          <div class="ready_list">These folks are ready:</div>
+        </div>
+        <!-- <button id="wait_close_guess" class="small-2 wait_close" type="guess">Let's go!</button> -->
+      </div>
+
+      <section id="game_finished">
+        <button class="left" id="game_finished_previous">Previous</button>
+        <button class="right" id="game_finished_next">Next</button>
+        <div class="clear" id="game_finished_content">
+        </div>
+        <button class="new_game" class="small-2">New Game</button>
+      </section>
+    </div>
+
+    <!-- load socket.io-client and expose io global -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/fabric.min.js"></script>
+    <script type="text/javascript" src="/js/svg.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.drawsvg.js"></script>
+  </body>
+</html>

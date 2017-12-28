@@ -1,0 +1,160 @@
+<html>
+	<head>
+		<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="/js/fabric.min.js"></script>
+		<script type="text/javascript" src="/js/svg.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.drawsvg.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			* { margin:0; padding:0; }
+			html, body { width:100%; height:100%; }
+			canvas { display:block; }
+			body {background-image: url('/images/background.png');background-size: cover;}
+			#canvas-wrapper, #svg-wrapper{background-color: #fff;}
+			.drawing-color-selector{display:inline-block;width:30px;height:30px;border-radius: 50%;}
+			.drawing-color-selector img{width:100%;height:100%;}
+			.right { float:right; }
+			button {
+				font-size: 14px;
+				color: #BE742F;
+				background-image: linear-gradient(-180deg, #F7E64C 0%, #EFB542 100%);
+				box-shadow: 1px 1px 1px 0 #3B6081;
+				border-radius: 5px;
+				height:32px;
+				padding:0 3px;
+				margin: 0 6px;
+			}
+			#banner {background-image: url('/images/banner.png'); background-size: cover;}
+			#banner-message { text-align: center; padding: 5px; color: #fff;}
+		</style>
+	</head>
+	<body>
+		<div id="banner">
+			<div id="banner-message">test</div>
+		</div>
+		<div id="drawing-options">
+			<img class="drawing-width-selector" src="/images/width-1-selected.png" value="5">
+			<img class="drawing-width-selector" src="/images/width-2.png" value="25">
+			<img class="drawing-width-selector" src="/images/width-3.png" value="40">
+			<img id="erase" src="/images/erase.png">
+			<img class="right" id="clear-canvas" src="/images/trash.png">
+			<button class="right" id="done" class="btn btn-info">Done</button>
+		</div>
+		<div id="canvas-wrapper">
+			<canvas id="canvas" width="600" height="500" style="border:1px solid #ccc;"></canvas>
+		</div>
+		<div id="svg-wrapper">
+			<div id="svg">
+			</div>
+		</div>
+		<div style="display: inline-block; margin-left: 10px">
+			<div id="canvasSvg" style="display:none;"></div>
+			<div id="drawing-mode-options">
+				<div class="drawing-color-selector" style="background-color:#000000;"><img src="/images/btn-color-selected.png"></div>
+				<div class="drawing-color-selector" style="background-color:#044999;"><img src="/images/btn-color.png"></div>
+				<div class="drawing-color-selector" style="background-color:#549707;"><img src="/images/btn-color.png"></div>
+				<div class="drawing-color-selector" style="background-color:#FF0000;"><img src="/images/btn-color.png"></div>
+				<div class="drawing-color-selector" style="background-color:#FFE11A;"><img src="/images/btn-color.png"></div>
+				<div class="drawing-color-selector" style="background-color:#FD7400;"><img src="/images/btn-color.png"></div>
+			</div>
+		</div>
+
+		<script>
+			(function() {
+				var canvas = document.getElementById('canvas');
+				var context = canvas.getContext('2d');
+
+				window.addEventListener('resize', resizeCanvas, false);
+
+				function resizeCanvas() {
+					canvas.width = window.innerWidth;
+					canvas.height = window.innerWidth;
+					$("#banner").height(window.innerWidth / 331 * 71);
+				}
+				resizeCanvas();
+
+				var $canvas = this.__canvas = new fabric.Canvas('canvas', {
+					isDrawingMode: true,
+				});
+
+				fabric.Object.prototype.transparentCorners = false;
+
+				var $canvasColorSelector = $('#drawing-color'),
+					$canvasSelectWidth = $('#drawing-line-width'),
+					$btnErase = $('#erase');
+					$btnClearCanvas = $('#clear-canvas');
+					$btnDone = $('#done');
+					
+					data = '';
+
+				$btnDone.on("click", function(){
+					console.log("start");
+					saveDrawing();
+					$("#canvas-wrapper").hide();
+					animateDrawing();
+				});
+
+				function saveDrawing() {
+					data = $canvas.toSVG();
+					console.log(data);
+					$("#svg").html(data);
+				}
+
+				function loadDrawing(){ 
+					fabric.loadSVGFromString(data, function(objects, options) {
+						var obj = fabric.util.groupSVGElements(objects, options);
+						$canvas.add(obj).renderAll();
+					});
+				}
+
+				function animateDrawing(){
+					drawDuration = 3000;
+					drawPathCount = $('#svg svg path').length || 1;
+					drawDurationPath = drawDuration / drawPathCount;
+
+					var mySVG = $('#svg svg').drawsvg();
+					mySVG.drawsvg({
+						duration: drawDurationPath,
+						stagger: drawDurationPath,
+						easing: 'linear',
+					});
+					mySVG.drawsvg('animate');
+				}
+
+				function clearCanvas(){
+					$canvas.clear();
+				}
+
+				// ============= DRAWING MODES =============
+				$btnClearCanvas.on("click", clearCanvas);
+				
+				$btnErase.on("click", function() {
+					$canvas.freeDrawingBrush.color = "#fff";
+					$(".drawing-color-selector").children().attr("src","/images/btn-color.png");
+					$btnErase.attr("src", "/images/erase-selected.png");
+				});
+				
+				$(".drawing-color-selector").on("click", function(){
+					$canvas.freeDrawingBrush.color = $(this).css("background-color");
+					$(".drawing-color-selector").children().attr("src","/images/btn-color.png");
+					$(this).children().attr("src","/images/btn-color-selected.png");
+					$btnErase.attr("src", "/images/erase.png");
+				});
+
+				$(".drawing-width-selector").on("click",function(){
+					$canvas.freeDrawingBrush.width = parseInt($(this).attr("value"));
+					$(".drawing-width-selector").each(function(){
+						$(this).attr("src", $(this).attr("src").replace("-selected",""));
+					});
+					$(this).attr("src", $(this).attr("src").replace(".","-selected."));
+				});
+
+				if ($canvas.freeDrawingBrush) {
+					$canvas.freeDrawingBrush.color = "#000";
+					$canvas.freeDrawingBrush.width = 5;
+				}
+			})();
+		</script>
+
+	</body>
+</html>

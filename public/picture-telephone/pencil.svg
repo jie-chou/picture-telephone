@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="162px" height="165px" viewBox="0 0 162 165" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="102.127146%" y2="102.249567%" id="linearGradient-1">
+            <stop stop-color="#FFFDDA" offset="0%"></stop>
+            <stop stop-color="#FECE8C" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="100%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#656565" offset="0%"></stop>
+            <stop stop-color="#070707" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Gameplay" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="User-Clicks-on-Join-Game" transform="translate(-106.000000, -218.000000)">
+            <g id="Group" transform="translate(93.000000, 218.000000)">
+                <g id="Group-2">
+                    <rect id="Rectangle" fill="#F6E34B" transform="translate(86.630835, 64.630835) rotate(-45.000000) translate(-86.630835, -64.630835) " x="6.13083515" y="54.9163691" width="161" height="19.4289322"></rect>
+                    <rect id="Rectangle" fill="#D4861F" transform="translate(111.500000, 89.500000) rotate(-45.000000) translate(-111.500000, -89.500000) " x="31" y="81" width="161" height="17"></rect>
+                    <rect id="Rectangle" fill="#EFB742" transform="translate(99.000000, 77.000000) rotate(-45.000000) translate(-99.000000, -77.000000) " x="18.5" y="66.3933983" width="161" height="21.2132034"></rect>
+                    <polygon id="Polygon-2" fill="url(#linearGradient-1)" transform="translate(30.432729, 136.872769) rotate(-16.500000) translate(-30.432729, -136.872769) " points="29.4530735 113.446326 54.8837937 160.29914 5.98168436 158.879131"></polygon>
+                    <polygon id="Polygon-2" fill="url(#linearGradient-2)" transform="translate(18.389860, 157.097186) rotate(-16.500000) translate(-18.389860, -157.097186) " points="17.8961751 150.591896 25.5860582 163.602477 11.1936617 163.20565"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
